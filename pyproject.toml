@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "coral"
+version = "0.1.0"
+description = ""
+authors = ["Alan Hollis <me@alanhollis.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.12"
+ultralytics = "^8.0.147"
+numpy = "^1.25.2"
+nvidia-cuda-runtime-cu11 = "11.7.99"
+nvidia-cuda-cupti-cu11 = "11.7.101"
+nvidia-cudnn-cu11 = "8.5.0.96"
+nvidia-cublas-cu11 = "11.10.3.66"
+nvidia-cufft-cu11 = "10.9.0.58"
+nvidia-curand-cu11 = "10.2.10.91"
+nvidia-cusolver-cu11 = "11.4.0.1"
+nvidia-cusparse-cu11 = "11.7.4.91"
+nvidia-nccl-cu11 = "=2.14.3"
+nvidia-nvtx-cu11 = "11.7.91"
+triton = "2.0.0"
+opt-einsum = "3.3"
+tensorflow = "v2.8.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
