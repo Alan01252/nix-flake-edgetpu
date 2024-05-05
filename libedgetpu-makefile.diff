@@ -1,0 +1,26 @@
+diff --git a/makefile_build/Makefile b/makefile_build/Makefile
+index ef7d290..c62231a 100644
+--- a/makefile_build/Makefile
++++ b/makefile_build/Makefile
+@@ -22,7 +22,7 @@ LIBEDGETPU_CFLAGS := \
+ LIBEDGETPU_CXXFLAGS := \
+ 	-fPIC \
+ 	-Wall \
+-	-std=c++14 \
++	-std=c++17 \
+ 	-DDARWINN_PORT_DEFAULT
+ 
+ LIBEDGETPU_LDFLAGS := \
+@@ -59,10 +59,11 @@ LIBEDGETPU_INCLUDES := \
+ 	$(BUILDDIR)/$(BUILDROOT)
+ LIBEDGETPU_INCLUDES := $(addprefix -I,$(LIBEDGETPU_INCLUDES))
+ 
+-LIBEDGETPU_CSRCS := $(TFROOT)/tensorflow/lite/c/common.c
++LIBEDGETPU_CSRCS := 
+ LIBEDGETPU_COBJS := $(call TOBUILDDIR,$(patsubst %.c,%.o,$(LIBEDGETPU_CSRCS)))
+ 
+ LIBEDGETPU_CCSRCS := \
++	$(TFROOT)/tensorflow/lite/c/common_internal.cc \
+ 	$(BUILDROOT)/api/allocated_buffer.cc \
+ 	$(BUILDROOT)/api/buffer.cc \
+ 	$(BUILDROOT)/api/driver_options_helper.cc \

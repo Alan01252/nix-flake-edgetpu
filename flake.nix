@@ -14,16 +14,17 @@
     let
       overlay1 = final: prev: {
         flatbuffers = prev.flatbuffers.overrideAttrs (oldAttrs: {
-          version = "1.12.0";
+          version = "24.5.26";
           NIX_CFLAGS_COMPILE = "-Wno-error=class-memaccess -Wno-error=maybe-uninitialized";
           cmakeFlags = oldAttrs.cmakeFlags or [ ] ++ [ "-DFLATBUFFERS_BUILD_SHAREDLIB=ON" ];
           NIX_CXXSTDLIB_COMPILE = "-std=c++17";
           configureFlags = oldAttrs.configureFlags or [ ] ++ [ "--enable-shared" ];
+          doCheck = false;
           src = final.fetchFromGitHub {
             owner = "google";
             repo = "flatbuffers";
-            rev = "v1.12.0";
-            sha256 = "sha256-L1B5Y/c897Jg9fGwT2J3+vaXsZ+lfXnskp8Gto1p/Tg=";
+            rev = "v23.5.26";
+            sha256 = "sha256-e+dNPNbCHYDXUS/W+hMqf/37fhVgEGzId6rhP3cToTE=";
           };
         });
       };
@@ -50,18 +51,18 @@
 
       packages.x86_64-linux.libedgetpu = with pkgs; stdenv.mkDerivation rec {
         pname = "libedgetpu";
-        version = "grouper";
+        version = "master";
 
         src = fetchFromGitHub {
           owner = "google-coral";
           repo = pname;
-          rev = "release-${version}";
-          sha256 = "sha256-73hwItimf88Iqnb40lk4ul/PzmCNIfdt6Afi+xjNiBE=";
+          rev = "${version}";
+          sha256 = "sha256-+8wV6w2uWp0yr/HRwgtSOUzkK++onHP1X5ctk+aWXjM=";
         };
 
-        patches = [ ./libedgetpu-stddef.diff ];
+        patches = [ ./libedgetpu-makefile.diff ];
 
-        makeFlags = [ "-f" "makefile_build/Makefile" "libedgetpu" ];
+        makeFlags = [ "-f" "makefile_build/Makefile" "libedgetpu"];
 
         buildInputs = [ libusb1 pkgs.abseil-cpp pkgs.flatbuffers ];
 
@@ -72,8 +73,8 @@
         TFROOT = "${fetchFromGitHub {
           owner = "tensorflow";
           repo = "tensorflow";
-          rev = "v2.7.0";  # replace with the version you need
-          sha256 = "sha256-n7jRDPeXsyq4pEWSWmOCas4c8VsArIKlCuwvSU/Ro/c=";  # replace with the actual SHA256
+          rev = "v2.15.0"; 
+          sha256 = "sha256-tCFLEvJ1lHy7NcHDW9Dkd+2D60x+AvOB8EAwmUSQCtM=";
         }}";
 
         enableParallelBuilding = false;
